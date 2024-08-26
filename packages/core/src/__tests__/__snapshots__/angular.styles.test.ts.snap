@@ -2570,7 +2570,7 @@ export default class Button {
   @Input() text = defaultProps[\\"text\\"];
   @Input() buttonText;
 
-  @Output() onClick = new EventEmitter();
+  @Output() click = new EventEmitter();
 }
 
 @NgModule({
@@ -2621,7 +2621,7 @@ export default class Button {
   @Input() openLinkInNewTab = defaultProps[\\"openLinkInNewTab\\"];
   @Input() text = defaultProps[\\"text\\"];
 
-  @Output() onClick = new EventEmitter();
+  @Output() click = new EventEmitter();
 }
 
 @NgModule({
