@@ -1,5 +1,27 @@
 # Change Log
 
+## 0.4.3
+
+### Patch Changes
+
+- 1bf28ea: Builder: fix: ensure component name suffix
+- 814d171: Angular: Feature: custom template selectors using metadata hook.
+- 531c15c: fix: check string value in `isUpperCase`
+- 84038d5: Angular: Feat: support destructuring of props or state objects with attributes as well as event listeners directly inside an HTML element
+
+## 0.4.2
+
+### Patch Changes
+
+- c29e3ca: fix index in for loops between mitosis<->builder
+
+## 0.4.1
+
+### Patch Changes
+
+- 1943604: state parser supports string literal keys
+- d446881: Angular: Fix: `useObjectWrapper` logic to correctly handle spread and objects as arguments
+
 ## 0.4.0
 
 ### Minor Changes
