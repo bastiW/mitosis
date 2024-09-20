@@ -4,7 +4,7 @@
     "build": "yarn run copy-build && ng build && cpy dist/e2e-angular/index.html . --rename=404.html",
     "clean": "rimraf src dist",
     "copy-build": "cpy ../e2e-app/output/angular/src angular_src/app",
-    "ng": "ng",
+    "ng ": "ng",
     "serve": "http-server dist/e2e-angular",
     "start": "yarn run copy-build && ng serve",
     "watch": "yarn run copy-build && ng build --watch --configuration development"
