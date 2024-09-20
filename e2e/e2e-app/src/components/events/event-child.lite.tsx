@@ -1,7 +1,12 @@
 import {useStore} from '@builder.io/mitosis';
 
 
-export default function EventChild(props) {
+export interface EventChildProps {
+  onConfirm: (name: string) => void;
+  onCancel: () => void;
+}
+
+export default function EventChild(props: EventChildProps) {
 
   const state = useStore({
     _onCancel() {
