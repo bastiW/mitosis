@@ -95,7 +95,6 @@ const angularTemplateNodeToMitosisNode = (
       });
     }
     for (const output of node.outputs) {
-      console.log('create OUTPUT ', capitalize(output.name))
       bindings[capitalize(output.name)] = createSingleBinding({
         code: transformBinding(
           (output.handler as ASTWithSource)

@@ -1,4 +1,5 @@
 import { replacePropsIdentifier, replaceStateIdentifier } from './replace-identifiers';
+import {removeOnFromAngularOutputEvent} from "@/generators/angular";
 
 export type StripStateAndPropsRefsOptions = {
   replaceWith?: string | ((name: string) => string);
@@ -60,7 +61,7 @@ export const DO_NOT_USE_VARS_TRANSFORMS = (
   outputVars?.forEach((_var) => {
     // determine expression edge cases onMessage( to this.onMessage.emit(
     const regexp = '(^|\\s|;|\\()(props\\.?)' + _var + '\\(';
-    const replacer = '$1' + context + _var + '.emit(';
+    const replacer = '$1' + context + removeOnFromAngularOutputEvent(_var) + '.emit(';
     newCode = newCode.replace(new RegExp(regexp, 'g'), replacer);
   });
 

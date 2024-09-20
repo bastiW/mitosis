@@ -7,6 +7,7 @@ import OneComponent from './components/one-component.lite';
 import ShowForComponent from './components/show-for-component.lite';
 import SignalParent from './components/signals/signal-parent.lite';
 import SpecialTags from './components/special-tags.lite';
+import EventParent from "./components/events/event-parent.lite";
 
 export default function Homepage(props: { pathname?: string }) {
   const state = useStore({
@@ -61,6 +62,10 @@ export default function Homepage(props: { pathname?: string }) {
       <Show when={state.pathToUse.startsWith('/disabled-input')}>
         <DisabledInput />
       </Show>
+
+        <Show when={state.pathToUse.startsWith('/event-listener')}>
+            <EventParent />
+        </Show>
     </div>
   );
 }
