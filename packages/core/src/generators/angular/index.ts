@@ -239,6 +239,22 @@ const stringifyBinding =
     }
   };
 
+export const replaceOutputEmits = (code?: string, outputEventEmitters?: string[]): string => {
+  let newCode = code || '';
+
+  if (!outputEventEmitters?.length) {
+    return newCode;
+  }
+
+  outputEventEmitters?.forEach((_var) => {
+    const regexp = '(^|\\s|;|\\()(props\\.?)' + _var + '\\(';
+    const replacer = '$1this.' + removeOnFromAngularOutputEvent(_var) + '.emit(';
+    newCode = newCode.replace(new RegExp(regexp, 'g'), replacer);
+  });
+
+  return newCode;
+};
+
 const handleNgOutletBindings = (node: MitosisNode, options: ToAngularOptions) => {
   let allProps = '';
   for (const key in node.properties) {
@@ -558,9 +574,9 @@ const processAngularCode =
       DO_NOT_USE_VARS_TRANSFORMS(code, {
         contextVars,
         domRefs,
-        outputVars,
         stateVars,
       }),
+      (newCode) => replaceOutputEmits(newCode, outputVars),
       (newCode) => stripStateAndPropsRefs(newCode, { replaceWith }),
     );
 
@@ -869,11 +885,11 @@ export const componentToAngular: TranspilerGenerator<ToAngularOptions> =
       props.delete(variableName);
     });
 
-    const outputs = outputVars.map((outputName) => {
+    // Building the @Output() EventEmitters
+    const outputEvents = outputVars.map((outputName) => {
       if (options?.experimental?.outputs) {
         return options?.experimental?.outputs(json, outputName);
       }
-
       return `@Output() ${removeOnFromAngularOutputEvent(outputName)} = new EventEmitter()`;
     });
 
@@ -997,7 +1013,7 @@ export const componentToAngular: TranspilerGenerator<ToAngularOptions> =
       Boolean(injectables.length) || dynamicComponents.size || refsForObjSpread.size;
 
     const angularCoreImports = [
-      ...(outputs.length ? ['Output', 'EventEmitter'] : []),
+      ...(outputEvents.length ? ['Output', 'EventEmitter'] : []),
       ...(options?.experimental?.inject ? ['Inject', 'forwardRef'] : []),
       'Component',
       ...(domRefs.size || dynamicComponents.size || refsForObjSpread.size
@@ -1046,7 +1062,7 @@ export const componentToAngular: TranspilerGenerator<ToAngularOptions> =
         })
         .join('\n')}
 
-      ${outputs.join('\n')}
+      ${outputEvents.join('\n')}
 
       ${Array.from(domRefs)
         .map(

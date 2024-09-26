@@ -1,4 +1,3 @@
-import { removeOnFromAngularOutputEvent } from '@/generators/angular';
 import { replacePropsIdentifier, replaceStateIdentifier } from './replace-identifiers';
 
 export type StripStateAndPropsRefsOptions = {
@@ -50,7 +49,7 @@ export type DO_NOT_USE_ARGS = {
  * Do not use these anywhere. We are migrating to AST transforms and should avoid Regex String.replace() as they are
  * very brittle.
  *
- * If you need to re-use a part of this, re-create it as an AST tranform first.
+ * If you need to re-use a part of this, re-create it as an AST transform first.
  */
 export const DO_NOT_USE_VARS_TRANSFORMS = (
   newCode: string,
@@ -61,7 +60,7 @@ export const DO_NOT_USE_VARS_TRANSFORMS = (
   outputVars?.forEach((_var) => {
     // determine expression edge cases onMessage( to this.onMessage.emit(
     const regexp = '(^|\\s|;|\\()(props\\.?)' + _var + '\\(';
-    const replacer = '$1' + context + removeOnFromAngularOutputEvent(_var) + '.emit(';
+    const replacer = '$1' + context + _var + '.emit(';
     newCode = newCode.replace(new RegExp(regexp, 'g'), replacer);
   });
 
