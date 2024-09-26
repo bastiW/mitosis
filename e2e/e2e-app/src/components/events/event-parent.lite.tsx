@@ -1,15 +1,21 @@
-import {useStore} from "@builder.io/mitosis";
+import {useState, useStore} from "@builder.io/mitosis";
 import EventChild from "./event-child.lite";
 
 export default function EventParent() {
 
+
+    const [eventLog, setEventLog] = useState<string>('');
+
+
     const state = useStore({
-        _onModalCancel() {
-           console.log('Modal canceled');
+        _onCancel() {
+            const newEventLog = eventLog + 'Cancel event called <br>'
+            setEventLog(newEventLog)
         },
 
-        _onModalConfirm(name: string) {
-            console.log(`Modal confirmed with name: ${name}`);
+        _onConfirm(name: string) {
+            const newEventLog = eventLog + `Confirm event called with parameter: ${name} <br>`
+            setEventLog(newEventLog)
         },
 
     });
@@ -17,9 +23,8 @@ export default function EventParent() {
 
     return (
         <>
-            <h1>Output Parent</h1>
-            <EventChild onConfirm={(name) => state._onModalConfirm(name)} onCancel={() => state._onModalCancel()}></EventChild>
-
+            <EventChild onConfirm={(name) => state._onConfirm(name)} onCancel={() => state._onCancel()}></EventChild>
+            <p data-testid="event-log" innerHTML={eventLog}>START LOG</p>
         </>
     );
 }

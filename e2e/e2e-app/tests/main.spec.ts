@@ -7,6 +7,7 @@ const test = playwrightTest.extend<{ packageName: PackageName | 'DEFAULT' }>({
 });
 
 test.describe('e2e', () => {
+
   test('todo list add', async ({ page }) => {
     await page.goto('/one-component/');
 
@@ -46,7 +47,6 @@ test.describe('e2e', () => {
     await expect(page.locator(`${textLocator}2`)).toBeVisible();
     await expect(page.locator(`${textLocator}3`)).toBeVisible();
   });
-
   test.describe('special HTML tags', () => {
     test('template tag', async ({ page, packageName }) => {
       await page.goto('/special-tags/');
@@ -100,5 +100,36 @@ test.describe('e2e', () => {
       const nativeEnabled = page.getByTestId('native-input-enabled');
       await expect(nativeEnabled).toBeEditable();
     });
+
+
+
   });
+
+
+  test('event listener', async ({ page, packageName }) => {
+
+    await page.goto('/event-listener/');
+
+    const eventLog = page.getByTestId('event-log')
+
+    console.log(eventLog)
+    await expect(eventLog).toHaveText('START LOG')
+
+    /*
+
+    const cancelButton = page.getByLabel('Cancel');
+    const confirmButton = page.getByLabel('Confirm');
+
+    function getEventLog() {
+      return page.getByTestId('event-log')
+    }
+
+
+    await cancelButton.click()
+
+    await expect(getEventLog()).toHaveText('Cancel event called')
+
+     */
+  });
+
 });
