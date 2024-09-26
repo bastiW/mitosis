@@ -8,13 +8,11 @@ export const targets: { packageName: PackageName; port: number }[] = (
   [
     // { packageName: 'e2e-alpine' },
     { packageName: 'e2e-angular' },
-      /*
     { packageName: 'e2e-qwik' },
     { packageName: 'e2e-react' },
     { packageName: 'e2e-solid' },
     { packageName: 'e2e-svelte' },
     { packageName: 'e2e-vue3' },
-       */
   ] as const
 ).map(({ packageName }, i) => {
   const port = 1234 + i;

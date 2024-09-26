@@ -8,13 +8,10 @@ const getSeededId = () => {
 
 module.exports = {
   files: 'src/**',
-  targets: ['reactNative', 'vue', 'angular'],
+  targets: ['reactNative', 'vue'],
   options: {
     vue: {
       cssNamespace: getSeededId,
     },
-    angular: {
-      typescript: true,
-    }
   },
 };

@@ -2,12 +2,12 @@ import { For, onMount, Show, useStore } from '@builder.io/mitosis';
 import { COMPONENT_PATHS } from './component-paths';
 import ComponentWithTypes from './components/component-with-types.lite';
 import DisabledInput from './components/disabled-input/disabled-input.lite';
+import EventParent from './components/events/event-parent.lite';
 import NestedParent from './components/nested/nested-parent.lite';
 import OneComponent from './components/one-component.lite';
 import ShowForComponent from './components/show-for-component.lite';
 import SignalParent from './components/signals/signal-parent.lite';
 import SpecialTags from './components/special-tags.lite';
-import EventParent from "./components/events/event-parent.lite";
 
 export default function Homepage(props: { pathname?: string }) {
   const state = useStore({
@@ -63,9 +63,9 @@ export default function Homepage(props: { pathname?: string }) {
         <DisabledInput />
       </Show>
 
-        <Show when={state.pathToUse.startsWith('/event-listener')}>
-            <EventParent />
-        </Show>
+      <Show when={state.pathToUse.startsWith('/event-listener')}>
+        <EventParent />
+      </Show>
     </div>
   );
 }

@@ -6,5 +6,5 @@ export const COMPONENT_PATHS = [
   '/special-tags/',
   '/signals/',
   '/disabled-input/',
-  '/event-listener/'
+  '/event-listener/',
 ];

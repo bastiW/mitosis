@@ -1,5 +1,5 @@
+import { removeOnFromAngularOutputEvent } from '@/generators/angular';
 import { replacePropsIdentifier, replaceStateIdentifier } from './replace-identifiers';
-import {removeOnFromAngularOutputEvent} from "@/generators/angular";
 
 export type StripStateAndPropsRefsOptions = {
   replaceWith?: string | ((name: string) => string);

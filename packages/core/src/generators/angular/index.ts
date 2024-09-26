@@ -37,7 +37,7 @@ import { BaseHook, MitosisComponent } from '@/types/mitosis-component';
 import { Binding, MitosisNode, checkIsForNode } from '@/types/mitosis-node';
 import { TranspilerGenerator } from '@/types/transpiler';
 import { flow, pipe } from 'fp-ts/lib/function';
-import {camelCase, isString, kebabCase, uniq} from 'lodash';
+import { camelCase, isString, kebabCase, uniq } from 'lodash';
 import traverse from 'neotraverse/legacy';
 import { format } from 'prettier/standalone';
 import isChildren from '../../helpers/is-children';
@@ -723,7 +723,7 @@ const classPropertiesPlugin = () => ({
 });
 
 export function removeOnFromAngularOutputEvent(outputName: string): string {
-  return outputName.startsWith('on') ? camelCase(outputName.substring(2)) : camelCase(outputName)
+  return outputName.startsWith('on') ? camelCase(outputName.substring(2)) : camelCase(outputName);
 }
 
 // if any state "property" is trying to access state.* or props.*
@@ -869,8 +869,6 @@ export const componentToAngular: TranspilerGenerator<ToAngularOptions> =
       props.delete(variableName);
     });
 
-
-
     const outputs = outputVars.map((outputName) => {
       if (options?.experimental?.outputs) {
         return options?.experimental?.outputs(json, outputName);
@@ -879,8 +877,7 @@ export const componentToAngular: TranspilerGenerator<ToAngularOptions> =
       return `@Output() ${removeOnFromAngularOutputEvent(outputName)} = new EventEmitter()`;
     });
 
-
-    outputs.forEach(console.log)
+    outputs.forEach(console.log);
 
     const domRefs = getRefs(json);
     const jsRefs = Object.keys(json.refs).filter((ref) => !domRefs.has(ref));

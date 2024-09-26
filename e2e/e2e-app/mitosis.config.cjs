@@ -4,7 +4,17 @@
 module.exports = {
   files: 'src/**',
   targets: [
+    'alpine',
     'angular',
+    'customElement',
+    'html',
+    'qwik',
+    'react',
+    'reactNative',
+    'solid',
+    'svelte',
+    'vue',
+    'webcomponent',
   ],
   commonOptions: {
     typescript: true,
