@@ -106,30 +106,25 @@ test.describe('e2e', () => {
   });
 
 
-  test('event listener', async ({ page, packageName }) => {
+  test.describe('Event Listener', () => {
+    test('Single Event without parameter', async ({ page, packageName }) => {
+      await page.goto('/event-listener/');
 
-    await page.goto('/event-listener/');
+      const cancelButton = page.getByRole('button', { name: 'Cancel' });;
 
-    const eventLog = page.getByTestId('event-log')
+      await cancelButton.click()
 
-    console.log(eventLog)
-    await expect(eventLog).toHaveText('START LOG')
+      await expect(page.getByTestId('event-log')).toHaveText('Cancel event called')
+    });
 
-    /*
+    test('Single Event with parameter', async ({ page, packageName }) => {
+      await page.goto('/event-listener/');
 
-    const cancelButton = page.getByLabel('Cancel');
-    const confirmButton = page.getByLabel('Confirm');
+      const confirmButton = page.getByRole('button', { name: 'Confirm' });;
 
-    function getEventLog() {
-      return page.getByTestId('event-log')
-    }
+      await confirmButton.click()
 
-
-    await cancelButton.click()
-
-    await expect(getEventLog()).toHaveText('Cancel event called')
-
-     */
-  });
-
+      await expect(page.getByTestId('event-log')).toHaveText('Confirm event called with parameter: Joe')
+    });
+  })
 });

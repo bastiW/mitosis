@@ -2,8 +2,6 @@ import {useState, useStore} from "@builder.io/mitosis";
 import EventChild from "./event-child.lite";
 
 export default function EventParent() {
-
-
     const [eventLog, setEventLog] = useState<string>('');
 
 
@@ -24,7 +22,7 @@ export default function EventParent() {
     return (
         <>
             <EventChild onConfirm={(name) => state._onConfirm(name)} onCancel={() => state._onCancel()}></EventChild>
-            <p data-testid="event-log" innerHTML={eventLog}>START LOG</p>
+            <p data-testid="event-log" innerHTML={eventLog}></p>
         </>
     );
 }
