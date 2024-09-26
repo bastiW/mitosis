@@ -877,8 +877,6 @@ export const componentToAngular: TranspilerGenerator<ToAngularOptions> =
       return `@Output() ${removeOnFromAngularOutputEvent(outputName)} = new EventEmitter()`;
     });
 
-    outputs.forEach(console.log);
-
     const domRefs = getRefs(json);
     const jsRefs = Object.keys(json.refs).filter((ref) => !domRefs.has(ref));
     const componentsUsed = Array.from(getComponentsUsed(json)).filter((item) => {
