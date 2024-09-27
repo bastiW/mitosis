@@ -239,7 +239,7 @@ const stringifyBinding =
     }
   };
 
-export const replaceOutputEmits = (code?: string, outputEventEmitters?: string[]): string => {
+export const stripOutputEmits = (code?: string, outputEventEmitters?: string[]): string => {
   let newCode = code || '';
 
   if (!outputEventEmitters?.length) {
@@ -576,7 +576,7 @@ const processAngularCode =
         domRefs,
         stateVars,
       }),
-      (newCode) => replaceOutputEmits(newCode, outputVars),
+      (newCode) => stripOutputEmits(newCode, outputVars),
       (newCode) => stripStateAndPropsRefs(newCode, { replaceWith }),
     );
 
